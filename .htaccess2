@@ -1,0 +1,29 @@
+# Enable rewrite engine
+RewriteEngine On
+
+# Handle PHP files
+AddType application/x-httpd-php .php
+
+# Set default character set
+AddDefaultCharset UTF-8
+
+# Prevent directory listing
+Options -Indexes
+
+# Security headers
+Header set X-Content-Type-Options "nosniff"
+Header set X-Frame-Options "DENY"
+Header set X-XSS-Protection "1; mode=block"
+
+# Handle callback.php specifically
+<Files "callback.php">
+    Order Allow,Deny
+    Allow from all
+</Files>
+
+# Error handling
+ErrorDocument 400 /error.php
+ErrorDocument 401 /error.php
+ErrorDocument 403 /error.php
+ErrorDocument 404 /error.php
+ErrorDocument 500 /error.php
